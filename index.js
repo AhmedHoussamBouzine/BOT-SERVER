@@ -36,7 +36,7 @@ var ws = new WebSocket('wss://stream.binance.com:9443/ws/' + streams.join('usdt@
   ws.on('message', (data) => {
     if (data) {
         const coins = JSON.parse(data); 
-        let coin = {date :coins.T,price :coins.p,coin :coins.s};
+        let coin = {date : new Date(coins.T),price : coins.p,coin :coins.s};
         let sql = 'insert into prices set ?';
 
          connection.query(sql,coin,(err,result) =>{
